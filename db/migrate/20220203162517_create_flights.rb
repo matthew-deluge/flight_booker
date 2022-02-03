@@ -1,12 +1,12 @@
 class CreateFlights < ActiveRecord::Migration[6.1]
   def change
     create_table :flights do |t|
-      t.int :number
+      t.integer :number
       t.string :company
-      t.duration :flight_duration
+      t.integer :flight_duration
       t.datetime :start_time
-      t.int :arrival_airport_id
-      t.int :departure_airport_id
+      t.integer :arrival_airport_id
+      t.integer :departure_airport_id
 
       t.timestamps
     end
