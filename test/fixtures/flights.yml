@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 
+  company: MyString
+  flight_duration: 
+  start_time: 2022-02-03 11:25:17
+  arrival_airport_id: 
+  departure_airport_id: 
+
+two:
+  number: 
+  company: MyString
+  flight_duration: 
+  start_time: 2022-02-03 11:25:17
+  arrival_airport_id: 
+  departure_airport_id: 
