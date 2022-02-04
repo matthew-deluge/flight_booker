@@ -10,9 +10,16 @@
       <option value="<%=number %>"><%=number %></option>
     <% end %>
   </select>
-  <%= select_tag(:date, options_for_select(@dates)) %>
+  <%= select_tag(:date, options_for_select(@start_time)) %>
     <%= submit_tag "Search" %>
 <% end %> 
+
+<% @flights.each do |f|%>
+  <p>
+  <%= f.company %>
+  <%= f.number %>
+  </p>
+<% end %>
 
 <!--<%= link_to 'New Flight', new_flight_path %>-->
 
