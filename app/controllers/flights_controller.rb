@@ -3,7 +3,7 @@ class FlightsController < ApplicationController
 
   # GET /flights or /flights.json
   def index
-    @flights = Flight.all
+    @flights = Flight.search(params[:search])
   end
 
   # GET /flights/1 or /flights/1.json
@@ -65,6 +65,6 @@ class FlightsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def flight_params
-      params.require(:flight).permit(:number, :company, :flight_duration, :start_time, :arrival_airport_id, :departure_airport_id)
+      params.require(:flight).permit(:number, :company, :flight_duration, :start_time, :arrival_airport_id, :departure_airport_id, :search)
     end
 end
