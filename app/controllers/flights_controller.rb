@@ -4,6 +4,8 @@ class FlightsController < ApplicationController
   # GET /flights or /flights.json
   def index
     @flights = Flight.search(params[:search])
+    @airport_options = Airport.all.map{ |a| [a.name, a.id] }
+    @dates = Flight.all.map{ |f| [f.start_time.strftime("%m/%d/%Y"), f.id] }
   end
 
   # GET /flights/1 or /flights/1.json
