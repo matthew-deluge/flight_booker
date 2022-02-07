@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+COMPANIES = ['TWA', 'Pan Am', 'Day Jet', 'Direct Air']
 Airport.destroy_all
 
 Airport.create!([{
@@ -15,30 +15,38 @@ Airport.create!([{
 {
   name: "Laguardia Airport",
   code: "LGA"
+},
+{
+  name: "Los Angeles Airport",
+  code: "LAX"
+},
+{
+  name: "Logan Airport",
+  code: "BOS"
+},
+{
+  name: "Miami-Dade Airport",
+  code: "MIA"
 }
-
 ])
 
 p "Created #{Airport.count} Airports."
 
 Flight.destroy_all
 
-Flight.create!([{
-  number: 421,
-  company: "TWA",
-  flight_duration: 60,
-  start_time: DateTime.current.end_of_day,
-  arrival_airport_id: Airport.first.id,
-  departure_airport_id: Airport.last.id
-},
-{
-  number: 345,
-  company: "Pan Am",
-  flight_duration: 300,
-  start_time: DateTime.current.end_of_day,
-  arrival_airport_id: Airport.last.id,
-  departure_airport_id: Airport.first.id
-}])
+20.times do
+  nodes = Airport.all.sample(2)
+  p nodes
+  Flight.create!([{
+    number: Faker::Number.number(digits: 3),
+    company: COMPANIES.sample,
+    flight_duration: Faker::Number.between(from: 30, to: 600),
+    start_time: Faker::Date.between(from: '2022-03-01', to: '2022-12-31'),
+    arrival_airport_id: nodes[1].id,
+    departure_airport_id: nodes[0].id
+  }])
+
+  end 
 
 p "Created #{Flight.count} Flights."
 #t.integer :number

@@ -5,7 +5,7 @@ class FlightsController < ApplicationController
   def index
     @flights = Flight.search([params[:departure_airport_id], params[:arrival_airport_id], params[:start_time]])
     @airport_options = Airport.all.map{ |a| [a.name, a.id] }
-    @start_time = Flight.all.map{ |f| [f.start_time.strftime("%m/%d/%Y"), f.start_time] }.uniq
+    @start_time = Flight.all.map{ |f| [f.start_time.strftime("%m/%d/%Y"), f.start_time] }.uniq.sort
   end
 
   # GET /flights/1 or /flights/1.json
