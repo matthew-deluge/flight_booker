@@ -1,6 +1,7 @@
 class Flight < ApplicationRecord
  belongs_to :arrival_airport, class_name: "Airport"
  belongs_to :departure_airport, class_name: "Airport"
+ has_many :bookings
 
  def self.search(search)
   if search
@@ -10,6 +11,10 @@ class Flight < ApplicationRecord
   else
     Flight.all
   end
+ end
+
+ def flight_info
+  "#{company} Flight #{number} from #{departure_airport} to #{arrival_airport}, leaves #{start_time}."
  end
 
 end
