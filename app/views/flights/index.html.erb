@@ -10,7 +10,7 @@
       <option value="<%=number %>"><%=number %></option>
     <% end %>
   </select>
-  <%= select_tag(:date, options_for_select(@start_time)) %>
+  <%= select_tag(:start_time, options_for_select(@start_time)) %>
     <%= submit_tag "Search" %>
 <% end %> 
 
@@ -18,6 +18,7 @@
   <p>
   <%= f.company %>
   <%= f.number %>
+  <%= f.start_time.to_formatted_s(:long_ordinal)%>
   </p>
 <% end %>
 

@@ -4,7 +4,9 @@ class Flight < ApplicationRecord
 
  def self.search(search)
   if search
-    Flight.where(departure_airport_id: search[0], arrival_airport_id: search[1])
+    flights = Flight.where(departure_airport_id: search[0], arrival_airport_id: search[1])
+    flights.select { |f| f.start_time === search[2] }
+    return flights
   else
     Flight.all
   end
