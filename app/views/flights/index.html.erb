@@ -6,16 +6,17 @@
   <%= select_tag(:departure_airport_id, options_for_select(@airport_options)) %>
   <%= select_tag(:arrival_airport_id, options_for_select(@airport_options)) %>
   <%= select_tag(:start_time, options_for_select(@start_time)) %>
-    <%= submit_tag "Search" %>
-<% end %> 
-
-<%=form_with model: Booking.new do |form| %>
-  <%=form.collection_radio_buttons(:flight_id, @flights, :id, :flight_info)%> 
   <select name="number of passengers", value = :passenger_number>
     <%= (1..4).each do |number| %>
       <option value="<%=number %>"><%=number %></option>
     <% end %>
   </select>
+    <%= submit_tag "Search" %>
+<% end %> 
+
+<%=form_with model: Booking.new do |form| %>
+  <%=form.collection_radio_buttons(:flight_id, @flights, :id, :flight_info)%> 
+  <%=form.hidden_field(:passenger_number, value: 3)%>
   <%=submit_tag "Select Flight" %>
 <% end%>
 
