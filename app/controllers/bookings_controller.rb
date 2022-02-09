@@ -13,6 +13,9 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @booking.passengers.build
+    #@passenger_number = params[:passenger_number].to_i
+    #@passenger_number.times { @booking.passengers.build }
   end
 
   # GET /bookings/1/edit
@@ -23,14 +26,12 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
 
-    respond_to do |format|
-      if @booking.save
-        format.html { redirect_to booking_url(@booking), notice: "Booking was successfully created." }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    if @booking.save
+      flash[:notice] = 'Booking successfully completed!'
+      redirect_to booking_path(@booking)
+    else
+      flash[:alert] = 'An error occured!'
+      render "new"
     end
   end
 
@@ -65,6 +66,6 @@ class BookingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:flight_id, :passenger_number)
+      params.require(:booking).permit(:flight_id, :passenger_number, passengers_attributes: [:name, :email])
     end
 end

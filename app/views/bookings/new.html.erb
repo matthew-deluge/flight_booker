@@ -1,5 +1,37 @@
 <h1>New Booking</h1>
 
-<%= render 'form', booking: @booking %>
+<%= form_with(model: @booking, method: :new) do |form| %>
+  <% if @booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
 
-<%= link_to 'Back', bookings_path %>
+      <ul>
+        <% @booking.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.fields_for :passengers, Passenger.new do |sub_form| %>
+    <%=sub_form.text_field :name %>
+    <%=sub_form.text_field :email %>
+  <% end %>
+
+
+  <div class="field">
+    <%= form.label :flight_id %>
+    <%= form.number_field :flight_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :passenger_number %>
+    <%= form.number_field :passenger_number %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', bookings_path %>-->

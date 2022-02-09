@@ -14,7 +14,7 @@
     <%= submit_tag "Search" %>
 <% end %> 
 
-<%=form_with model: Booking.new do |form| %>
+<%=form_with(model: Booking.new, url: new_booking_path, method: :get) do |form| %>
   <%=form.collection_radio_buttons(:flight_id, @flights, :id, :flight_info)%> 
   <%=form.hidden_field(:passenger_number, value: 3)%>
   <%=submit_tag "Select Flight" %>
