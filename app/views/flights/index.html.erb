@@ -1,36 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Flights</h1>
+<h1>Search For Flights</h1>
 
-<%= form_with(url: '/flights',  method: :get) do %>
-  <%= select_tag(:departure_airport_id, options_for_select(@airport_options)) %>
-  <%= select_tag(:arrival_airport_id, options_for_select(@airport_options)) %>
-  <%= select_tag(:start_time, options_for_select(@start_time)) %>
-  <select name="number of passengers", value = :passenger_number>
-    <%= (1..4).each do |number| %>
-      <option value="<%=number %>"><%=number %></option>
-    <% end %>
-  </select>
-    <%= submit_tag "Search" %>
-<% end %> 
+<% unless @flights.empty? %>
+  <h2>Search Again! </h2>
+<% end %>
+
+<%= render "search_form" %>
 
 <%=form_with(model: Booking.new, url: new_booking_path, method: :get) do |form| %>
   <%=form.collection_radio_buttons(:flight_id, @flights, :id, :flight_info)%> 
-  <%=form.hidden_field(:passenger_number, value: 3)%>
+  <%=form.hidden_field(:passenger_number, value: params["number of passengers"])%>
   <%=submit_tag "Select Flight" %>
 <% end%>
-
-
-<!--<% @flights.each do |f|%>
-<p>
-    <%= f.company %>
-    <%= f.number %>
-    <%= f.start_time.to_formatted_s(:long_ordinal)%>
-    <%= form_with(model: @booking, method: :new) do %>
-      <%=submit_tag "Select Flight"%>
-    <% end %>
-</p>
-<% end %>
-
-<%= link_to 'New Flight', new_flight_path %>-->
-

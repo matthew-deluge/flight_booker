@@ -12,11 +12,14 @@
       </ul>
     </div>
   <% end %>
+  <% i=1 %>
   <% params[:booking][:passenger_number].to_i.times do %>
     <%= form.fields_for :passengers, Passenger.new do |sub_form| %>
-      <%=sub_form.text_field :name %>
-      <%=sub_form.text_field :email %>
+      <%="Passenger #{i}"%>
+      <%=sub_form.text_field :name, placeholder: "name" %>
+      <%=sub_form.text_field :email, placeholder: "email" %>
     <% end %>
+    <%i+=1%>
   <% end %>
 
 

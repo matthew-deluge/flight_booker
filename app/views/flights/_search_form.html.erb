@@ -1,0 +1,11 @@
+<%= form_with(url: '/flights',  method: :get) do %>
+  <%= select_tag(:departure_airport_id, options_for_select(@airport_options)) %>
+  <%= select_tag(:arrival_airport_id, options_for_select(@airport_options)) %>
+  <%= select_tag(:start_time, options_for_select(@start_time)) %>
+  <select name="number of passengers", value = :passenger_number>
+    <%= (1..4).each do |number| %>
+      <option value="<%=number %>"><%=number %></option>
+    <% end %>
+  </select>
+    <%= submit_tag "Search" %>
+<% end %> 
