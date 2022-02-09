@@ -1,11 +1,35 @@
 <%= form_with(url: '/flights',  method: :get) do %>
-  <%= select_tag(:departure_airport_id, options_for_select(@airport_options)) %>
-  <%= select_tag(:arrival_airport_id, options_for_select(@airport_options)) %>
-  <%= select_tag(:start_time, options_for_select(@start_time)) %>
-  <select name="number of passengers", value = :passenger_number>
-    <%= (1..4).each do |number| %>
-      <option value="<%=number %>"><%=number %></option>
-    <% end %>
-  </select>
-    <%= submit_tag "Search" %>
+  <div class='field'>
+    <label class="label">Departure Airport</label>
+      <div class='control'>
+        <%= select_tag(:departure_airport_id, options_for_select(@airport_options), class:"select is-normal") %>
+      </div>
+  </div>
+  <div class="field">
+    <label class='label'> Arrival Airport </label>
+    <div class ="control">
+      <%= select_tag(:arrival_airport_id, options_for_select(@airport_options), class:"select is-normal") %>
+    </div>
+  </div>
+  <div class='field'>
+    <label class='label'>Date </label>
+    <div class="control">
+      <%= select_tag(:start_time, options_for_select(@start_time), class:"select is-normal") %>
+    </div>
+  </div>
+  <div class='field'>
+    <label class='label'>Number of Passengers</label>
+      <div class='control'>
+        <select name="number of passengers", value = :passenger_number, class= "select is-normal">
+          <%= (1..4).each do |number| %>
+            <option value="<%=number %>"><%=number %></option>
+          <% end %>
+        </select>
+      </div>
+  </div>
+  <div class="field">
+    <div class='control'>
+      <%= submit_tag "Search Flights", class: "button" %>
+    </div>
+  </div>
 <% end %> 

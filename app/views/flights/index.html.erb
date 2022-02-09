@@ -1,15 +1,21 @@
 <p id="notice"><%= notice %></p>
+<div class="columns">
+  <div class="column is-1"></div>
+  <div class="column is-6">
+      <h3 class="title is-3">Search For Flights</h3>
 
-<h1>Search For Flights</h1>
+      <% unless @flights.empty? %>
+        <h2>Search Again! </h2>
+      <% end %>
 
-<% unless @flights.empty? %>
-  <h2>Search Again! </h2>
-<% end %>
+      <%= render "search_form" %>
+  </div>
 
-<%= render "search_form" %>
-
-<%=form_with(model: Booking.new, url: new_booking_path, method: :get) do |form| %>
-  <%=form.collection_radio_buttons(:flight_id, @flights, :id, :flight_info)%> 
-  <%=form.hidden_field(:passenger_number, value: params["number of passengers"])%>
-  <%=submit_tag "Select Flight" %>
-<% end%>
+  <div class="column is-6">
+    <%=form_with(model: Booking.new, url: new_booking_path, method: :get) do |form| %>
+      <%=form.collection_radio_buttons(:flight_id, @flights, :id, :flight_info)%> 
+      <%=form.hidden_field(:passenger_number, value: params["number of passengers"])%>
+      <%=submit_tag "Select Flight" %>
+    <% end%>
+  </div>
+</div>
