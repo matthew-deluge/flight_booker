@@ -13,9 +13,8 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
-    @booking.passengers.build
-    #@passenger_number = params[:passenger_number].to_i
-    #@passenger_number.times { @booking.passengers.build }
+    @passenger_number = params[:booking][:passenger_number].to_i
+    @passenger_number.times { @booking.passengers.build }
   end
 
   # GET /bookings/1/edit
