@@ -1,14 +1,20 @@
 <p id="notice"><%= notice %></p>
+<br>
 
-<p>
-  <strong>Flight:</strong>
-  <%= @booking.flight_id %>
-</p>
-
-<p>
-  <strong>Passenger:</strong>
-  <%= @booking.passenger_number %>
-</p>
-
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
-<%= link_to 'Back', bookings_path %>
+<div class="columns">
+<div class="column is-1"></div>
+<div class="column is-5">
+  <h1 class="title is-4">Booking Information</h1>
+  <div>
+    <%= @flight.flight_info %>
+  
+    <div>
+      <% @booking.passengers.each_with_index do |p,i|%>
+        <div>
+         <%="Passenger ##{i+=1}: #{p.name}"%>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+</div>

@@ -8,6 +8,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1 or /bookings/1.json
   def show
+    @flight = Flight.find(@booking.flight_id)
   end
 
   # GET /bookings/new
