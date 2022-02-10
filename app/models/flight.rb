@@ -14,7 +14,7 @@ class Flight < ApplicationRecord
  end
 
  def flight_info
-  "#{company} Flight #{number} from #{departure_airport} to #{arrival_airport}, leaves #{start_time}."
+  "#{company} Flight #{number} from #{departure_airport.name} to #{arrival_airport.name}, leaves #{start_time.to_formatted_s(:long)}."
  end
 
 end

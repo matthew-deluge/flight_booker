@@ -1,34 +1,46 @@
-<h1>New Booking</h1>
-
-<%= form_with(model:@booking) do |form| %>
-  <% if @booking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
-
-      <ul>
-        <% @booking.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <% i=1 %>
-  <% params[:booking][:passenger_number].to_i.times do %>
-    <%= form.fields_for :passengers, Passenger.new do |sub_form| %>
-      <%="Passenger #{i}"%>
-      <%=sub_form.text_field :name, placeholder: "name" %>
-      <%=sub_form.text_field :email, placeholder: "email" %>
-    <% end %>
-    <%i+=1%>
-  <% end %>
-
-
-  <%=form.hidden_field :flight_id, value: params[:booking][:flight_id]%>
-  <%=form.hidden_field :passenger_number, value: params[:booking][:passenger_number]%>
-
-  <div class="actions">
-    <%= form.submit %>
+<br>
+<div class="columns">
+  <div class="column is-one-half">
+    <h1 class="title is-4">Flight Info<h1>
+      <%= @flight.flight_info%>
   </div>
-<% end %>
 
-<%= link_to 'Back', bookings_path %>-->
+  <div class="column is-one-half">
+    <%= form_with(model:@booking) do |form| %>
+      <% if @booking.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+          <ul>
+            <% @booking.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <% i=1 %>
+      <h1 class="title is-4">Enter Passenger Info</h1>
+      <% params[:booking][:passenger_number].to_i.times do %>
+        <%= form.fields_for :passengers, Passenger.new do |sub_form| %>
+        <div>
+          <br>
+          <%="Passenger #{i}:"%>
+          <%=sub_form.text_field :name, placeholder: "name", class: "control" %>
+          <%=sub_form.text_field :email, placeholder: "email", class:"control" %>
+        </div>
+        <% end %>
+        <%i+=1%>
+      <% end %>
+
+
+      <%=form.hidden_field :flight_id, value: params[:booking][:flight_id]%>
+      <%=form.hidden_field :passenger_number, value: params[:booking][:passenger_number]%>
+      <br>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
