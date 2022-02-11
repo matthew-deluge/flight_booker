@@ -3,8 +3,7 @@ class FlightsController < ApplicationController
 
   # GET /flights or /flights.json
   def index
-    @date = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, params[:date][:day].to_i)
-    p @date
+    @date = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, params[:date][:day].to_i) unless params[:date].nil?
     @flights = Flight.search([params[:departure_airport_id], params[:arrival_airport_id], @date])
     @airport_options = Airport.all.map{ |a| [a.name, a.id] }
     @start_time = Flight.all.map{ |f| [f.start_time.strftime("%m/%d/%Y"), f.start_time] }.uniq.sort

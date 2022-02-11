@@ -36,18 +36,20 @@ Flight.destroy_all
 
 Airport.all.each do |departure|
   Airport.all.each do |arrival|
-    date = DateTime.now()
-    365.times do
-      Flight.create!([{
-        number: Faker::Number.number(digits: 3),
-        company: COMPANIES.sample,
-        flight_duration: Faker::Number.between(from: 30, to: 600),
-        start_time: date,
-        arrival_airport_id: arrival.id,
-        departure_airport_id: departure.id
-      }])
-      date = date.next_day
-    end
+    next if departure == arrival
+      date = DateTime.now()
+      30.times do
+        Flight.create!([{
+          number: Faker::Number.number(digits: 3),
+          company: COMPANIES.sample,
+          flight_duration: Faker::Number.between(from: 30, to: 600),
+          start_time: date,
+          arrival_airport_id: arrival.id,
+          departure_airport_id: departure.id
+        }])
+        date = date.next_day
+      end
+    
   end
 end 
 
