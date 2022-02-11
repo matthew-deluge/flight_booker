@@ -34,21 +34,27 @@ p "Created #{Airport.count} Airports."
 
 Flight.destroy_all
 
-20.times do
-  nodes = Airport.all.sample(2)
-  p nodes
-  Flight.create!([{
-    number: Faker::Number.number(digits: 3),
-    company: COMPANIES.sample,
-    flight_duration: Faker::Number.between(from: 30, to: 600),
-    start_time: Faker::Date.between(from: '2022-03-01', to: '2022-12-31'),
-    arrival_airport_id: nodes[1].id,
-    departure_airport_id: nodes[0].id
-  }])
-
-  end 
+Airport.all.each do |departure|
+  Airport.all.each do |arrival|
+    date = DateTime.now()
+    365.times do
+      Flight.create!([{
+        number: Faker::Number.number(digits: 3),
+        company: COMPANIES.sample,
+        flight_duration: Faker::Number.between(from: 30, to: 600),
+        start_time: date,
+        arrival_airport_id: arrival.id,
+        departure_airport_id: departure.id
+      }])
+      date = date.next_day
+    end
+  end
+end 
 
 p "Created #{Flight.count} Flights."
+
+Booking.destroy_all
+Passenger.destroy_all
 #t.integer :number
 #t.string :company
 #t.integer :flight_duration

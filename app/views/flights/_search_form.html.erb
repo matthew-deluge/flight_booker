@@ -14,7 +14,8 @@
   <div class='field'>
     <label class='label'>Date </label>
     <div class="control is-expanded">
-      <%= select_tag(:start_time, options_for_select(@start_time), class:"select is-fullwidth") %>
+      <%=select_date(date=Date.current)%>
+      <!--<%= select_tag(:start_time, options_for_select(@start_time), class:"select is-fullwidth") %>-->
     </div>
   </div>
   <div class='field'>
